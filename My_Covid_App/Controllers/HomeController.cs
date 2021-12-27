@@ -6,7 +6,7 @@ namespace My_Covid_App.Controllers
     {
         public IActionResult Index()
         {
-            return View();
+            return Ok("Works");
         }
     }
 }

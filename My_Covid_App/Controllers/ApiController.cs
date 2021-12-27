@@ -4,7 +4,7 @@ namespace My_Covid_App.Controllers
 {
     [ApiController]
     [Route("[Controller]")]
-    public class ApiController : ControllerBase
+    public abstract class ApiController : ControllerBase
     {
     }
 }
