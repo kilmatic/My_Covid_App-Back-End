@@ -14,8 +14,7 @@ builder.Services.AddDbContext<CovidDBContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("CovidDB"));
 });
 
-builder.Services
-    .AddIdentity<User, IdentityRole>(options =>
+builder.Services.AddIdentity<User, IdentityRole>(options =>
     {
         options.SignIn.RequireConfirmedAccount = true;
         options.Password.RequireDigit = false;
@@ -27,9 +26,12 @@ builder.Services
     })
     .AddEntityFrameworkStores<CovidDBContext>();
 
-var applcationSettings = builder.Configuration.GetSection("Secret");
-builder.Services.Configure<AppSettings>(applcationSettings);
-var key = Encoding.UTF8.GetBytes(applcationSettings.Key);
+var applicationSettings = builder.Configuration.GetRequiredSection("Jwt");
+
+builder.Services.Configure<AppSettings>(applicationSettings);
+
+var appSettings = applicationSettings.Get<AppSettings>();
+var key = Encoding.ASCII.GetBytes(appSettings.Secret);
 
 builder.Services.AddAuthentication(x =>
 {
@@ -43,10 +45,12 @@ builder.Services.AddAuthentication(x =>
     {
         ValidateIssuerSigningKey = true,
         IssuerSigningKey = new SymmetricSecurityKey(key),
-        ValidateIssuer = true,
-        ValidateAudience = true
+        ValidateIssuer = false,
+        ValidateAudience = false
     };
 });
+
+builder.Services.AddCors();
 
 builder.Services.AddControllers();
 

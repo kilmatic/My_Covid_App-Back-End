@@ -42,10 +42,10 @@ namespace My_Covid_App.Controllers
         }
 
         [Route(nameof(Login))]
-        public async Task<ActionResult<string>> Login(LoginRequestModel Model)
+        public async Task<ActionResult<object>> Login(LoginRequestModel Model)
         {
             var user = await userManager.FindByNameAsync(Model.UserName);
-            if(user == null)
+            if (user == null)
             {
                 return Unauthorized();
             }
@@ -57,7 +57,7 @@ namespace My_Covid_App.Controllers
             }
 
             var tokenHandler = new JwtSecurityTokenHandler();
-            var key = Encoding.ASCII.GetBytes(appSettings.Secret);
+            var key = Encoding.ASCII.GetBytes(this.appSettings.Secret);
 
             var tokenDescriptor = new SecurityTokenDescriptor
             {
@@ -68,7 +68,10 @@ namespace My_Covid_App.Controllers
             var token = tokenHandler.CreateToken(tokenDescriptor);
             var encryptedToken = tokenHandler.WriteToken(token);
 
-            return encryptedToken;
+            return new 
+            { 
+                Token = encryptedToken 
+            };
         }
     }
 }
