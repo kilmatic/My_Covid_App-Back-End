@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using My_Covid_App.Models;
 
@@ -11,9 +12,10 @@ using My_Covid_App.Models;
 namespace My_Covid_App.Migrations
 {
     [DbContext(typeof(CovidDBContext))]
-    partial class ApplicationDBContextModelSnapshot : ModelSnapshot
+    [Migration("20211229205713_PatientTable")]
+    partial class PatientTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -155,13 +157,13 @@ namespace My_Covid_App.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("My_Covid_App.Entities.Patients", b =>
+            modelBuilder.Entity("My_Covid_App.Models.Patient", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("PatientId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PatientId"), 1L, 1);
 
                     b.Property<string>("Address")
                         .IsRequired()
@@ -175,8 +177,8 @@ namespace My_Covid_App.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<long>("Identification")
-                        .HasColumnType("bigint");
+                    b.Property<int>("Identification")
+                        .HasColumnType("int");
 
                     b.Property<string>("LastName")
                         .IsRequired()
@@ -186,8 +188,9 @@ namespace My_Covid_App.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("NextOfKeenPhoneNumber")
-                        .HasColumnType("int");
+                    b.Property<string>("NextOfKeenPhoneNumber")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("PhoneNumber")
                         .HasColumnType("int");
@@ -196,11 +199,11 @@ namespace My_Covid_App.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
-                    b.HasKey("Id");
+                    b.HasKey("PatientId");
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Patients");
+                    b.ToTable("Patient");
                 });
 
             modelBuilder.Entity("My_Covid_App.Models.User", b =>
@@ -319,7 +322,7 @@ namespace My_Covid_App.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("My_Covid_App.Entities.Patients", b =>
+            modelBuilder.Entity("My_Covid_App.Models.Patient", b =>
                 {
                     b.HasOne("My_Covid_App.Models.User", "User")
                         .WithMany("Patients")
