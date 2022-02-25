@@ -3,43 +3,41 @@ using Microsoft.AspNetCore.Mvc;
 using My_Covid_App.Entities;
 using My_Covid_App.Infrastructure;
 using My_Covid_App.Models;
-using My_Covid_App.Models.PatientsModel;
+using My_Covid_App.Models.NursesModel;
 
 namespace My_Covid_App.Controllers
 {
-    public class PatientsController : ApiController
+    public class NursesController : ApiController
     {
         private readonly CovidDBContext data;
 
-        public PatientsController(CovidDBContext data)
+        public NursesController(CovidDBContext data)
         {
             this.data = data;
         }
 
         [Authorize]
         [HttpPost]
-        public async Task<ActionResult> Create(PatientCreateRequestModel model)
+        public async Task<ActionResult> Create(NurseCreateRequestModel model)
         {
             var userId = this.User.GetId();
 
-            var patient = new Patient
+            var nurse = new Nurse
             {
                 FirstName = model.FirstName,
                 LastName = model.LastName,
                 Identification = model.Identification,
-                Address = model.Address,
+                EmployeeNumber = model.EmployeeNumber,
                 PhoneNumber = model.PhoneNumber,
                 Email = model.Email,
-                NextOfKeen = model.NextOfKeen,
-                NextOfKeenPhoneNumber = model.NextOfKeenPhoneNumber,
                 UserId = userId,
             };
 
-            this.data.Add(patient);
+            this.data.Add(nurse);
 
             await this.data.SaveChangesAsync();
 
-            return Created(nameof(this.Create), patient.Id);
+            return Created(nameof(this.Created), nurse.Id);
         }
     }
 }

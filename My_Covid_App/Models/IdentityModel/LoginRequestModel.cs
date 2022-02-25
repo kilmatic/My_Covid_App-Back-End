@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace My_Covid_App.Models.Identity
+namespace My_Covid_App.Models.IdentityModel
 {
     public class LoginRequestModel
     {

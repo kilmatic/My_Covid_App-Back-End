@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace My_Covid_App.Entities
 {
-    public class Patients
+    public class Patient
     {
         public int Id { get; set; }
         [Required]

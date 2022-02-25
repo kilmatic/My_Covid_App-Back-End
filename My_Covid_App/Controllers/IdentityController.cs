@@ -4,7 +4,7 @@ using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using My_Covid_App.Helpers;
 using My_Covid_App.Models;
-using My_Covid_App.Models.Identity;
+using My_Covid_App.Models.IdentityModel;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
@@ -23,7 +23,7 @@ namespace My_Covid_App.Controllers
         }
 
         [Route(nameof(Register))]
-        public async Task<IActionResult> Register(RegisterRequestModel model)
+        public async Task<ActionResult> Register(RegisterRequestModel model)
         {
             var user = new User
             {

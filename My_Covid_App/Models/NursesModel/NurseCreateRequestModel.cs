@@ -1,11 +1,9 @@
-﻿using My_Covid_App.Models;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
-namespace My_Covid_App.Entities
+namespace My_Covid_App.Models.NursesModel
 {
-    public class Pharmacist
+    public class NurseCreateRequestModel
     {
-        public int Id { get; set; }
         [Required]
         public string FirstName { get; set; }
         [Required]
@@ -18,9 +16,5 @@ namespace My_Covid_App.Entities
         public int PhoneNumber { get; set; }
         [Required]
         public string Email { get; set; }
-        [Required]
-        public string UserId { get; set; }
-
-        public User User { get; set; }
     }
 }
