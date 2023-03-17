@@ -25,6 +25,18 @@ namespace My_Covid_App.Controllers
         [Route(nameof(Register))]
         public async Task<ActionResult> Register(RegisterRequestModel model)
         {
+            var userExists = await userManager.FindByNameAsync(model.UserName);
+
+            if (userExists != null)
+            {
+                return StatusCode(
+                    StatusCodes.Status403Forbidden,
+                    new Response
+                    {
+                        Status = Message = "User already exists!"
+                    });
+            }
+
             var user = new User
             {
                 Email = model.Email,

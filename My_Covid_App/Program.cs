@@ -23,6 +23,9 @@ builder.Services.AddIdentity<User, IdentityRole>(options =>
         options.Password.RequiredUniqueChars = 0;
         options.Password.RequireNonAlphanumeric = false;
         options.Password.RequiredLength = 6;
+    }).AddRoles<User, IdentityRole>(options = options =>
+    {
+        options.Add()
     })
     .AddEntityFrameworkStores<CovidDBContext>();
 
