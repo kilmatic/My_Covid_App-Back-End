@@ -1,8 +1,10 @@
+using Microsoft.AspNet.Identity;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using My_Covid_App.Helpers;
+using My_Covid_App.Infrastructure;
 using My_Covid_App.Models;
 using System.Text;
 
@@ -76,5 +78,7 @@ app.UseEndpoints(endpoints =>
 {
     endpoints.MapControllers();
 });
+
+await app.CreateRolesAsync(builder.Configuration);
 
 app.Run();

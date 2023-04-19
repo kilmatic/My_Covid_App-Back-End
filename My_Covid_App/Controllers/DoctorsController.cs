@@ -7,6 +7,7 @@ using My_Covid_App.Models.DoctorsModel;
 
 namespace My_Covid_App.Controllers
 {
+    [Authorize(Roles = "Doctor")]
     public class DoctorsController : ApiController
     {
         private readonly CovidDBContext data;
@@ -30,7 +31,7 @@ namespace My_Covid_App.Controllers
                 EmployeeNumber = model.EmployeeNumber,
                 PhoneNumber = model.PhoneNumber,
                 Email = model.Email,
-                UserId = userId,
+                UserId = userId!,
             };
 
             this.data.Add(doctor);

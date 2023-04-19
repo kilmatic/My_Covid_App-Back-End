@@ -6,6 +6,7 @@ using My_Covid_App.Helpers;
 using My_Covid_App.Models;
 using My_Covid_App.Models.IdentityModel;
 using System.IdentityModel.Tokens.Jwt;
+using System.Runtime.Serialization;
 using System.Security.Claims;
 using System.Text;
 
@@ -53,7 +54,7 @@ namespace My_Covid_App.Controllers
             var passwordValid = await userManager.CheckPasswordAsync(user, Model.Password);
             if (!passwordValid)
             {
-                return Unauthorized();
+                return new InvalidDataContractException();
             }
 
             var tokenHandler = new JwtSecurityTokenHandler();
