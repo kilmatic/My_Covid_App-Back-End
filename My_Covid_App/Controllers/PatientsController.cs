@@ -7,6 +7,7 @@ using My_Covid_App.Models.PatientsModel;
 
 namespace My_Covid_App.Controllers
 {
+    [Authorize(Roles = "Patient")]
     public class PatientsController : ApiController
     {
         private readonly CovidDBContext data;

@@ -6,6 +6,7 @@ using My_Covid_App.Controllers;
 
 namespace My_Covid_App.Controllers
 {
+    
     public class AccountController : ApiController
     {
        
