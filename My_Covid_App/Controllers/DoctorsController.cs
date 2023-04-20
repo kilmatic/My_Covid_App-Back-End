@@ -30,7 +30,7 @@ namespace My_Covid_App.Controllers
                 EmployeeNumber = model.EmployeeNumber,
                 PhoneNumber = model.PhoneNumber,
                 Email = model.Email,
-                UserId = userId,
+                UserId = userId!
             };
 
             this.data.Add(doctor);
@@ -39,5 +39,7 @@ namespace My_Covid_App.Controllers
 
             return Created(nameof(this.Created), doctor.Id);
         }
+
+        //public async Task<ActionResult> Update()
     }
 }

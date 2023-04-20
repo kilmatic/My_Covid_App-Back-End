@@ -15,19 +15,19 @@ builder.Services.AddDbContext<CovidDBContext>(options =>
 });
 
 builder.Services.AddIdentity<User, IdentityRole>(options =>
-    {
-        options.SignIn.RequireConfirmedAccount = true;
-        options.Password.RequireDigit = false;
-        options.Password.RequireUppercase = false;
-        options.Password.RequireLowercase = false;
-        options.Password.RequiredUniqueChars = 0;
-        options.Password.RequireNonAlphanumeric = false;
-        options.Password.RequiredLength = 6;
-    }).AddRoles<User, IdentityRole>(options = options =>
-    {
-        options.Add()
-    })
-    .AddEntityFrameworkStores<CovidDBContext>();
+{
+    options.SignIn.RequireConfirmedAccount = true;
+    options.Password.RequireDigit = false;
+    options.Password.RequireUppercase = false;
+    options.Password.RequireLowercase = false;
+    options.Password.RequiredUniqueChars = 0;
+    options.Password.RequireNonAlphanumeric = false;
+    options.Password.RequiredLength = 6;
+}).AddRoles<User, IdentityRole>(options = options =>
+{
+    options.Add()
+})
+.AddEntityFrameworkStores<CovidDBContext>();
 
 var applicationSettings = builder.Configuration.GetRequiredSection("Jwt");
 

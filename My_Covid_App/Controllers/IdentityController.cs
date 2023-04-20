@@ -29,12 +29,7 @@ namespace My_Covid_App.Controllers
 
             if (userExists != null)
             {
-                return StatusCode(
-                    StatusCodes.Status403Forbidden,
-                    new Response
-                    {
-                        Status = Message = "User already exists!"
-                    });
+                return StatusCode(StatusCodes.Status403Forbidden);
             }
 
             var user = new User
@@ -57,13 +52,12 @@ namespace My_Covid_App.Controllers
         public async Task<ActionResult<object>> Login(LoginRequestModel Model)
         {
             var user = await userManager.FindByNameAsync(Model.UserName);
+            var passwordValid = await userManager.CheckPasswordAsync(user, Model.Password);
+
             if (user == null)
             {
                 return Unauthorized();
-            }
-
-            var passwordValid = await userManager.CheckPasswordAsync(user, Model.Password);
-            if (!passwordValid)
+            }else if (!passwordValid)
             {
                 return Unauthorized();
             }
